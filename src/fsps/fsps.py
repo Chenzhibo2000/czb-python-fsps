@@ -280,6 +280,7 @@ class StellarPopulation(object):
         * 5: Delayed tau-model with a transition at a time ``sf_trunc`` to a
           linearly decreasing SFH with the slope specified by ``sf_slope``. See
           Simha et al. 2014 for details.
+        * 6: Schechter function sfh edited by chenzhibo on 2022.9.20
 
     :param tau: (default: 1.0)
         Defines e-folding time for the SFH, in Gyr. Only used if ``sfh=1`` or
@@ -432,6 +433,10 @@ class StellarPopulation(object):
         Optical depth of the AGN dust torus, which affects the shape of the AGN
         SED.  Outside the range (5, 150) the AGN SED is an
         extrapolation.
+        
+    :param kai:(default:1)
+        power of T at the beginning for Schechter function sfh(only used when 
+        sfh=6), edited by chenzibo on 2022.9.20.
     """
 
     def __init__(
@@ -512,6 +517,7 @@ class StellarPopulation(object):
             duste_qpah=3.5,
             fagn=0.0,
             agn_tau=10.0,
+            kai=1
         )
 
         # Parse any input options.
@@ -1283,6 +1289,7 @@ class ParameterSet(object):
         "igm_factor",
         "fagn",
         "agn_tau",
+        "kai",
     ]
 
     @property
